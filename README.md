@@ -1,15 +1,78 @@
-# 🎮 Unity AI & Game Mechanics Portfolio
-*(🇹🇷 Türkçe versiyonu aşağıdadır / Turkish version below)*
+🎮 NPC AI — FSM Tabanlı Düşman Yapay Zekası / FSM-Based Enemy AI
 
-This repository contains my AI and game programming projects, focusing on clean C# scripting and core game mechanics in Unity.
+🇹🇷 Türkçe aşağıda / 🇬🇧 English below
 
-## 🤖 01 - Simple Enemy AI (NavMesh)
-A rule-based enemy artificial intelligence implementing a foundational "Sense-Think-Act" loop.
 
-### 🚀 Key Features:
-* **Navigation Engine:** Dynamic pathfinding and obstacle avoidance utilizing Unity's NavMesh system.
-* **Decision Making Logic:** Distance-based state management (Idle, Chase, and Catch states).
-* **Event Handling:** Automated UI triggering and time scaling (`Time.timeScale`) upon target collision.
+🇬🇧 English
+What is this?
+A simple but solid enemy AI built in Unity using a Finite State Machine (FSM) pattern. The NPC detects the player, chases them, and triggers a Game Over when it catches up.
+States
+StateConditionBehaviourIdlePlayer out of rangeNPC stands stillChasePlayer within detection rangeNPC moves toward playerAttackPlayer within attack rangeGame Over triggered
+How it works
+Player enters detection range
+        ↓
+    [ Chase ]  →  Player in attack range  →  [ Attack ] → Game Over
+        ↑
+Player leaves range
+        ↓
+    [ Idle ]
+Setup
+
+Add NPC.cs to your enemy GameObject
+Add a NavMeshAgent component to the same object
+Bake a NavMesh on your scene (Window → AI → Navigation)
+Assign gameOverText in the Inspector (a UI Text/Panel)
+Tag your player object as Player
+Hit Play
+
+Inspector Settings
+FieldDefaultDescriptionDetection Range10How far the NPC can seeAttack Range0.5How close to trigger Game Over
+Tech
+
+Unity (any version with NavMesh)
+C#
+UnityEngine.AI (NavMeshAgent)
+FSM pattern
+
+
+🇹🇷 Türkçe
+Bu ne?
+Unity'de Finite State Machine (FSM) pattern'i kullanılarak yapılmış basit ama sağlam bir düşman yapay zekası. NPC oyuncuyu algılar, kovalayıp yakalarsa Game Over tetiklenir.
+Durumlar (States)
+DurumKoşulDavranışIdleOyuncu menzil dışındaNPC beklerChaseOyuncu görüş menziline girdiNPC oyuncuya doğru koşarAttackOyuncu saldırı menziline girdiGame Over tetiklenir
+Nasıl çalışır?
+Oyuncu görüş menziline girer
+        ↓
+    [ Chase ]  →  Oyuncu saldırı menziline girer  →  [ Attack ] → Game Over
+        ↑
+Oyuncu uzaklaşır
+        ↓
+    [ Idle ]
+Kurulum
+
+NPC.cs dosyasını düşman GameObject'ine ekle
+Aynı objeye NavMeshAgent component'i ekle
+Sahneye NavMesh pişir (Window → AI → Navigation → Bake)
+Inspector'da gameOverText alanına bir UI Text/Panel ata
+Oyuncu objesini Player olarak etiketle
+Play'e bas
+
+Inspector Ayarları
+AlanVarsayılanAçıklamaDetection Range10NPC'nin görüş menziliAttack Range0.5Game Over tetiklenme mesafesi
+Kullanılan Teknolojiler
+
+Unity (NavMesh destekleyen her versiyon)
+C#
+UnityEngine.AI (NavMeshAgent)
+FSM (Finite State Machine) pattern
+
+
+📁 Dosyalar / Files
+📦 NPC-AI
+ ┣ 📜 NPC.cs        ← Düşman AI / Enemy AI
+ ┣ 📜 Player.cs     ← NavMesh ile oyuncu hareketi / Player movement
+ ┗ 📜 README.md
+
 
 ### 📹 Demo:
 <img width="1920" height="992" alt="demo mp4" src="https://github.com/user-attachments/assets/a7a375df-96ae-48cb-bc90-29e489a54171" />
@@ -17,14 +80,3 @@ A rule-based enemy artificial intelligence implementing a foundational "Sense-Th
 
 ---
 
-# 🇹🇷 Türkçe Versiyon
-
-Bu repo, Unity ve C# kullanarak geliştirdiğim yapay zeka ve oyun mekaniği çalışmalarımı içermektedir.
-
-## 🤖 01 - Basit Düşman Yapay Zekası (NavMesh)
-Bu proje, düşmanın oyuncuyu algıladığı, takip ettiği ve yakaladığında oyunu bitirdiği temel bir "Algıla-Düşün-Uygula" döngüsünü kapsamaktadır.
-
-### 🚀 Özellikler:
-* **Navigasyon:** Unity NavMesh sistemi ile dinamik yol bulma ve engellerden kaçınma.
-* **Karar Mekanizması:** Mesafe tabanlı durum yönetimi (Bekleme, Kovalama ve Yakalama durumları).
-* **Olay Yönetimi (Event Handling):** Çarpışma anında otomatik tetiklenen kullanıcı arayüzü (UI) ve zaman dondurma (`Time.timeScale`).
